@@ -1,0 +1,25 @@
+CREATE DATABASE smart_stock_inventory;
+USE smart_stock_inventory;
+CREATE TABLE time_series_data (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    record_date DATE NOT NULL,
+    item VARCHAR(100) NOT NULL,
+    item_id INT NOT NULL,
+    store_id INT NOT NULL,
+    stock INT NOT NULL,
+    stock_status VARCHAR(50) NOT NULL,
+    sales INT NOT NULL
+);
+INSERT INTO time_series_data 
+(record_date, item, item_id, store_id, stock, stock_status, sales)
+VALUES
+('2025-01-01', 'Shampoo', 101, 1, 50, 'In-Stock', 12),
+('2025-01-02', 'Shampoo', 101, 1, 38, 'Low-Stock', 20),
+('2025-01-03', 'Shampoo', 101, 1, 25, 'Low-Stock', 15),
+('2025-01-01', 'Soap', 102, 1, 80, 'In-Stock', 30),
+('2025-01-02', 'Soap', 102, 1, 45, 'Low-Stock', 35),
+('2025-01-04', 'Shampoo', 101, 1, 0, 'Out-of-Stock', 0),
+('2025-01-01', 'Rice Bag', 201, 2, 200, 'In-Stock', 40),
+('2025-01-02', 'Rice Bag', 201, 2, 150, 'In-Stock', 50),
+('2025-01-03', 'Rice Bag', 201, 2, 80, 'Low-Stock', 60);
+select * from time_series_data;
