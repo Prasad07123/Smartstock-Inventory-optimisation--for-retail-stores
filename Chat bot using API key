@@ -1,0 +1,43 @@
+import requests
+import json
+
+API_KEY = "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"   # put your key here
+
+def chat(message):
+    url = "https://api.openai.com/v1/chat/completions"
+
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    body = {
+        "model": "gpt-4o-mini",
+        "messages": [
+            {"role": "system", "content": "You are a helpful chatbot."},
+            {"role": "user", "content": message}
+        ]
+    }
+
+    response = requests.post(url, headers=headers, json=body)
+    data = response.json()
+
+    # Print error if 'choices' missing
+    if "choices" not in data:
+        print("\nAPI ERROR:\n", data, "\n")
+        return "Error: check API key, model, or account."
+
+    return data["choices"][0]["message"]["content"]
+
+
+print("\nChatbot Ready! Type 'exit' to stop.\n")
+
+while True:
+    user_input = input("You: ")
+
+    if user_input.lower() == "exit":
+        print("Bot: Goodbye!")
+        break
+
+    reply = chat(user_input)
+    print("Bot:", reply)
